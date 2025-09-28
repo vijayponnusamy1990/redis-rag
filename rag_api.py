@@ -5,6 +5,7 @@ from rag_query_llm_cache import rag_query, get_redis_client, TOP_K
 
 # Import main from ingest_confluence
 from ingest_confluence import main as ingest_confluence_main
+from ingest_pdf import main as ingest_pdf_main
 
 app = FastAPI(title="RAG API")
 
@@ -28,3 +29,11 @@ def ingest_confluence_endpoint():
     """
     ingest_confluence_main()
     return {"status": "Ingestion triggered"}
+
+@app.post("/ingest/pdf")
+def ingest_pdf_endpoint():
+    """
+    Triggers the PDF ingestion process.
+    """
+    ingest_pdf_main()
+    return {"status": "PDF ingestion triggered"}
